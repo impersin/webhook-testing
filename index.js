@@ -9,6 +9,10 @@ const
 
 // Sets server port and logs message on success
 
+app.get('/',(req,res)=>{
+  res.sendStatus(200);
+})
+
 // Creates the endpoint for our webhook 
 app.post('/webhook', (req, res) => {  
  
