@@ -32,9 +32,16 @@ app.post('/webhook', (req, res) => {
       // will only ever contain one message, so we get index 0
       let webhook_event = entry.messaging[0];
       let sender_psid = webhook_event.sender.id;
-      
+
       console.log('Sender PSID: ' + sender_psid);
       console.log(webhook_event);
+      
+      if (webhook_event.message) {
+        handleMessage(sender_psid, webhook_event.message);        
+      } else if (webhook_event.postback) {
+        handlePostback(sender_psid, webhook_event.postback);
+      }
+      
     });
 
     // Returns a '200 OK' response to all requests
