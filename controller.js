@@ -13,9 +13,10 @@ module.exports = {
       "text": `You sent the message: "${received_message.text}". Now send me an image!`
     }
   }
-  // Sends the response message
-  callSendAPI(sender_psid, response);
 
+  // Sends the response message
+  this.callSendAPI(sender_psid, response);
+  
   },
   callSendAPI:function(sender_psid, response) {
     // Construct the message body
@@ -25,7 +26,7 @@ module.exports = {
       },
       "message": response
     }
-
+    console.log('request_body',request_body);
     request({
       "uri": "https://graph.facebook.com/v2.6/me/messages",
       "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
