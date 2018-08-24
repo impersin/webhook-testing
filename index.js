@@ -6,8 +6,13 @@ const
   bodyParser = require('body-parser'),
   app = express().use(bodyParser.json()); // creates express http server
   const dotenv = require("dotenv").config().parsed;
+  const controller = require('./controller');
 
 // Sets server port and logs message on success
+
+var timestamp = new Date().valueOf();
+
+console.log(timestamp);
 
 app.get('/',(req,res)=>{
   res.sendStatus(200);
@@ -23,10 +28,12 @@ app.post('/webhook', (req, res) => {
 
     // Iterates over each entry - there may be multiple if batched
     body.entry.forEach(function(entry) {
-
       // Gets the message. entry.messaging is an array, but 
       // will only ever contain one message, so we get index 0
       let webhook_event = entry.messaging[0];
+      let sender_psid = webhook_event.sender.id;
+      
+      console.log('Sender PSID: ' + sender_psid);
       console.log(webhook_event);
     });
 
