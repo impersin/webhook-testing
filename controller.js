@@ -13,10 +13,9 @@ module.exports = {
       "text": `You sent the message: "${received_message.text}". Now send me an image!`
     }
   }
-
   // Sends the response message
-  this.callSendAPI(sender_psid, response);
-  
+  callSendAPI(sender_psid, response);
+
   },
   callSendAPI:function(sender_psid, response) {
     // Construct the message body
