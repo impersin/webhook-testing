@@ -67,17 +67,24 @@ module.exports = {
     }
     console.log('response =>',response);
   } 
-
   // Sends the response message
   callSendAPI(sender_psid, response);
   
   },
   // Handles messaging_postbacks events
   handlePostback:function (sender_psid, received_postback) {
+    let response;
   
-  },
-  // Sends response messages via the Send AP
-  callSendAPI:function (sender_psid, response) {
-    
+    // Get the payload for the postback
+    let payload = received_postback.payload;
+
+    // Set the response based on the postback payload
+    if (payload === 'yes') {
+      response = { "text": "Thanks!" }
+    } else if (payload === 'no') {
+      response = { "text": "Oops, try sending another image." }
+    }
+    // Send the message to acknowledge the postback
+    callSendAPI(sender_psid, response);  
   }
 }
